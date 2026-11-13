@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1419">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Magnus">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Magnus – Daily Companion</title>
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span id="brand-face"></span><div><span>Magnus</span><small>dein Daily Companion</small></div></div>
+    <nav id="nav">
+      <button data-view="heute">☀️ <span>Heute</span></button>
+      <button data-view="inbox">📥 <span>Inbox</span><b class="badge" id="badge-inbox"></b></button>
+      <button data-view="aufgaben">✅ <span>Aufgaben</span></button>
+      <button data-view="erinnerungen">⏰ <span>Erinnerungen</span></button>
+      <button data-view="routinen">🔁 <span>Routinen</span></button>
+      <button data-view="fokus">🎯 <span>Fokus</span><b class="badge live" id="badge-focus"></b></button>
+      <button data-view="einkauf">🛒 <span>Einkauf</span><b class="badge" id="badge-einkauf"></b></button>
+      <button data-view="ideen">💡 <span>Ideen-Parkplatz</span></button>
+      <button data-view="interessen">📚 <span>Interessen</span></button>
+      <button data-view="rueckblick">🌙 <span>Rückblick</span></button>
+      <button data-view="einstellungen">⚙️ <span>Einstellungen</span></button>
+    </nav>
+    <div class="sidebar-foot"><button class="btn ghost" data-act="open-bar">🪟 <span>Desktop-Leiste</span></button><div>Taste <kbd>N</kbd> = schnell notieren</div></div>
+  </aside>
+
+  <main>
+    <form id="capture" autocomplete="off">
+      <input id="capture-input" placeholder="Was soll Magnus festhalten? z. B. „Zahnarzt anrufen morgen 10 Uhr #pflicht !“">
+      <button type="submit">Notieren</button>
+      <div id="capture-preview"></div>
+    </form>
+    <div id="view"></div>
+  </main>
+
+  <div id="alerts"></div>
+  <div id="modal" class="hidden"></div>
+  <div id="toast"></div>
+
+  <script src="magnus.js"></script>
+  <script src="backend.js"></script>
+  <script>document.getElementById("brand-face").innerHTML = Magnus.face("happy", 38);</script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost'))
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+  </script>
+</body>
+</html>
